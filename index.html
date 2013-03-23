@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Saw : Sqlite3 API Wrapper" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Saw</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nicuveo/SAW">View on GitHub</a>
+
+          <h1 id="project_title">Saw</h1>
+          <h2 id="project_tagline">Sqlite3 API Wrapper</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/nicuveo/SAW/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/nicuveo/SAW/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<em>SAW</em> (Sqlite3 API Wrapper)</h1>
+
+<blockquote>
+<p>My heart is full of <code>saw::Row</code>.<br>
+-- <em>Sad anonymous</em></p>
+
+<p>A <strong>Z</strong> that stands for <code>saw::Row</code>!<br>
+-- <em>Illiterate anonymous</em></p>
+</blockquote>
+
+<h2>Yet another wrapper</h2>
+
+<p>Faced with the need to write some code using sqlite3's C API, I've procrastinated the real task at hand by writing a standalone library wrapping it.</p>
+
+<p>The goal of this small library is <em>NOT</em> to hide sqlite3's API; if it aimed to do so, it would be far more complicated than it already is. Its goal is simply to facilitate some common sqlite3 tasks, such as managing database connections and statements. All wrapped structures such as <code>Database</code> and <code>Statement</code> provide access to the raw data that lies beneath.</p>
+
+<p>Here's a short example of the clarity it brings to the code.</p>
+
+<h3>C API</h3>
+
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">score_min</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">sqlite3</span><span class="o">*</span> <span class="n">db</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">sqlite3_stmt</span><span class="o">*</span> <span class="n">stmt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_open</span><span class="p">(</span><span class="s">"test.db"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">db</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_prepare_v2</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">"create table if not exists results (name text, score int)"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stmt</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_step</span><span class="p">(</span><span class="n">stmt</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_DONE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="n">sqlite3_finalize</span><span class="p">(</span><span class="n">stmt</span><span class="p">);</span>
+
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_prepare_v2</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">"select score from results where name = ? and score &gt;= ?"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stmt</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_bind_text</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">SQLITE_TRANSIENT</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_bind_int</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">score_min</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sqlite3_step</span><span class="p">(</span><span class="n">stmt</span><span class="p">);</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_DONE</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">SQLITE_ROW</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"score: "</span> <span class="o">&lt;&lt;</span> <span class="n">sqlite3_column_int</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">sqlite3_finalize</span><span class="p">(</span><span class="n">stmt</span><span class="p">);</span>
+  <span class="n">sqlite3_close</span><span class="p">(</span><span class="n">db</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3><em>SAW</em></h3>
+
+<div class="highlight"><pre><span class="kt">void</span> <span class="nf">run</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">score_min</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">try</span>
+  <span class="p">{</span>
+    <span class="n">saw</span><span class="o">::</span><span class="n">Database</span> <span class="n">db</span><span class="p">(</span><span class="s">"test.db"</span><span class="p">);</span>
+    <span class="n">saw</span><span class="o">::</span><span class="n">Statement</span> <span class="n">stmt</span><span class="p">;</span>
+
+    <span class="n">db</span><span class="p">.</span><span class="n">exec</span><span class="p">(</span><span class="s">"create table if not exists results (name text, score int)"</span><span class="p">);</span>
+
+    <span class="n">stmt</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="s">"select score from results where name = ? and score &gt;= ?"</span><span class="p">);</span>
+    <span class="n">stmt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">stmt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">score_min</span><span class="p">;</span>
+
+    <span class="n">BOOST_FOREACH</span> <span class="p">(</span><span class="k">const</span> <span class="n">saw</span><span class="o">::</span><span class="n">Row</span><span class="o">&amp;</span> <span class="n">row</span><span class="p">,</span> <span class="n">stmt</span><span class="p">.</span><span class="n">result</span><span class="p">())</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"score: "</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">as_integer</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">saw</span><span class="o">::</span><span class="n">Exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"error: "</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre>./configure
+make
+make doc     <span class="c"># generates doxygen documentation</span>
+make check   <span class="c"># runs tests and generates code coverage report using lcov and cppcheck</span>
+make install <span class="c"># installs to /usr/local</span>
+</pre></div>
+
+<h2>Internal plumbing</h2>
+
+<p>Inside, <em>SAW</em> uses lots of <code>boost</code> code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using <code>boost::variant</code> and iterators use <code>boost::iterator_facade</code>.</p>
+
+<p>The code has been mostly tested and is currently at &gt;90% of code coverage as reported by <em>lcov</em>.</p>
+
+<p>If, somehow, you end up using it, please let me know what you think!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Saw maintained by <a href="https://github.com/nicuveo">nicuveo</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
