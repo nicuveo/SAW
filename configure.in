@@ -1,0 +1,50 @@
+## configure.in
+## Made by nicuveo for saw
+
+
+
+## Configuration
+profile: release
+sub-dirs: check
+prefix: /usr/local
+
+
+## Defaults
+CC	  = g++
+CFLAGS	  = -W -Wall -Wextra -ansi -pedantic -I include -I src
+DFLAGS    = -O0 -g3 -ggdb3 -DDEBUG
+RFLAGS    = -O3 -DNDEBUG
+LDFLAGS   =
+LIBS      =
+LIBS_DIRS =
+TARGETS   = $(LIBA)
+
+CFIL =                                 \
+        src/shared/shared_database.cc  \
+        src/shared/shared_statement.cc \
+        src/row_iterator.cc            \
+        src/statement.cc               \
+        src/database.cc                \
+        src/value.cc                   \
+        src/error.cc                   \
+        src/blob.cc                    \
+        src/row.cc                     \
+
+
+## Debug
+[debug]
+	CFLAGS  += $(DFLAGS) -pg
+	LDFLAGS += -pg
+
+## Check
+[check]
+	CFLAGS  += $(DFLAGS) -Werror
+	LDFLAGS  += -Werror
+
+## Profiling
+[profiling]
+	CFLAGS  += -g3 -ggdb3 -O2
+
+## Release
+[release]
+	CFLAGS += $(RFLAGS)

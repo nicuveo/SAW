@@ -1,0 +1,5 @@
+CFLAGS = -I../../include -W -Wall -Wextra -Werror -ansi -pedantic -g3 -ggdb3 --coverage
+LDFLAGS += --coverage -lsqlite3
+
+CFIL =                                   \
+    test.cc                              \

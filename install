@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+prefix="$1"
+
+sudo cp -v bin/libsaw.a "$prefix/lib/"
+sudo cp -rv include/saw "$prefix/include/"
