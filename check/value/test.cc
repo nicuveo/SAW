@@ -46,13 +46,27 @@ BOOST_AUTO_TEST_CASE(value_01)
 
 BOOST_AUTO_TEST_CASE(value_02)
 {
-  Value v(Float(2345));
+  Value v1(Float(2345));
+  Value v2(2345.f);
+  Value v3(2345.);
 
-  BOOST_REQUIRE(not v.null());
-  BOOST_REQUIRE_EQUAL(Integer(2345), v.as_integer());
-  BOOST_REQUIRE_EQUAL(Float(2345),   v.as_float()  );
-  BOOST_REQUIRE_EQUAL(Text("2345"),  v.as_text()   );
-  BOOST_REQUIRE_EQUAL(Blob("2345"),  v.as_blob()   );
+  BOOST_REQUIRE(not v1.null());
+  BOOST_REQUIRE_EQUAL(Integer(2345), v1.as_integer());
+  BOOST_REQUIRE_EQUAL(Float(2345),   v1.as_float()  );
+  BOOST_REQUIRE_EQUAL(Text("2345"),  v1.as_text()   );
+  BOOST_REQUIRE_EQUAL(Blob("2345"),  v1.as_blob()   );
+
+  BOOST_REQUIRE(not v2.null());
+  BOOST_REQUIRE_EQUAL(Integer(2345), v2.as_integer());
+  BOOST_REQUIRE_EQUAL(Float(2345),   v2.as_float()  );
+  BOOST_REQUIRE_EQUAL(Text("2345"),  v2.as_text()   );
+  BOOST_REQUIRE_EQUAL(Blob("2345"),  v2.as_blob()   );
+
+  BOOST_REQUIRE(not v3.null());
+  BOOST_REQUIRE_EQUAL(Integer(2345), v3.as_integer());
+  BOOST_REQUIRE_EQUAL(Float(2345),   v3.as_float()  );
+  BOOST_REQUIRE_EQUAL(Text("2345"),  v3.as_text()   );
+  BOOST_REQUIRE_EQUAL(Blob("2345"),  v3.as_blob()   );
 }
 
 BOOST_AUTO_TEST_CASE(value_03)

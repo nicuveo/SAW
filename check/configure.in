@@ -8,6 +8,7 @@ COVERAGE_OUT = ../doc/coverage
 TESTS =                                    \
   statement                                \
   database                                 \
+  errors                                   \
   cache                                    \
   value                                    \
   flag                                     \

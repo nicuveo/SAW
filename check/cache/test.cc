@@ -31,6 +31,11 @@ namespace
       {
         return 42;
       }
+
+      void fail(int i) const
+      {
+        throw i;
+      }
   };
 
 }
