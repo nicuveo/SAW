@@ -8,7 +8,6 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-#include <iostream>
 #include "shared/shared_statement.hh"
 #include "error.hh"
 
