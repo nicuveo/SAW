@@ -9,6 +9,7 @@
 // Includes
 
 #include <saw/statement.hh>
+#include <saw/exceptions.hh>
 #include <saw/row_iterator.hh>
 
 
@@ -45,7 +46,7 @@ namespace saw
   RowIterator::dereference() const
   {
     if (stmt_.empty())
-      std::abort();
+      throw LogicError("dereference: empty iterator");
 
     return stmt_.current_row();
   }
@@ -53,8 +54,10 @@ namespace saw
   void
   RowIterator::increment()
   {
-    if (stmt_.empty() or stmt_.ready())
-      std::abort();
+    if (stmt_.empty())
+      throw LogicError("increment: empty iterator");
+    if (stmt_.ready())
+      throw LogicError("increment: invalid iterator");
 
     *this = stmt_.next();
   }

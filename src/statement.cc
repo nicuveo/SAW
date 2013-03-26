@@ -106,6 +106,9 @@ namespace saw
   Statement::Statement(Database db, const char* query)
     : db_(db)
   {
+    if (not db.connected())
+      throw LogicError("statement: disconnected database");
+
     Owner<SharedStatement>::reset(new SharedStatement(db, query));
   }
 
@@ -171,6 +174,9 @@ namespace saw
   Statement&
   Statement::bind(const ParameterName& name, const Value& value)
   {
+    if (empty())
+      throw LogicError("bind: empty statement");
+
     int index = sqlite3_bind_parameter_index(raw_data(), name);
 
     if (index == 0)
@@ -182,6 +188,9 @@ namespace saw
   Statement&
   Statement::bind(const ParameterIndex& pi, const Value& value)
   {
+    if (empty())
+      throw LogicError("bind: empty statement");
+
     boost::apply_visitor(BindVisitor(raw_data(), pi), value);
     return *this;
   }
@@ -218,8 +227,11 @@ namespace saw
   RowRange
   Statement::result()
   {
+    if (empty())
+      throw LogicError("result: empty statement");
+
     if (busy())
-      std::abort();
+      throw LogicError("result: busy statement (recursive call?)");
 
     return std::make_pair(next(), RowIterator());
   }
@@ -234,12 +246,18 @@ namespace saw
   bool
   Statement::step()
   {
+    if (empty())
+      throw LogicError("step: empty statement");
+
     return data().step(*this);
   }
 
   void
   Statement::reset()
   {
+    if (empty())
+      throw LogicError("reset: empty statement");
+
     data().reset();
   }
 

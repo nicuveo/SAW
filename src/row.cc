@@ -87,8 +87,10 @@ namespace saw
   Value
   Row::fetch(int i) const
   {
-    if (stmt_.empty() or outdated())
-      std::abort();
+    if (stmt_.empty())
+      throw InternalError("fetch value: empty statement");
+    if (outdated())
+      throw LogicError("fetch value: outdated statement");
 
     sqlite3_stmt* stmt = stmt_.raw_data();
     int type = sqlite3_column_type(stmt, i);
