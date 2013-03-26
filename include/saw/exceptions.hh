@@ -57,6 +57,7 @@ namespace saw
   SAW_EXCEPTION(std::logic_error,   LogicError);
   SAW_EXCEPTION(std::out_of_range,  OutOfRange);
   SAW_EXCEPTION(std::runtime_error, RuntimeError);
+  SAW_EXCEPTION(std::logic_error,   InternalError);
 
 }
 
