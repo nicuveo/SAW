@@ -76,12 +76,14 @@ namespace saw
         // data fetching
 
         virtual Value fetch(int index) const = 0;
+        virtual void fail(int index) const = 0;
 
 
       private:
         // helper
 
         const Cache& self();
+        const Cache& verify(int index) const;
 
 
         // data

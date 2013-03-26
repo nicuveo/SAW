@@ -53,6 +53,7 @@ namespace saw
       // helpers
 
       std::string fetch(int i) const;
+      void fail(int i) const;
 
 
       // data

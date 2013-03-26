@@ -9,6 +9,7 @@
 // Includes
 
 #include <boost/bind.hpp>
+#include <saw/exceptions.hh>
 #include <saw/row.hh>
 #include "misc/foreach.hh"
 
@@ -100,10 +101,16 @@ namespace saw
       case SQLITE_BLOB:    return get_blob(stmt, i);
       case SQLITE_NULL:    return get_null(stmt, i);
       default:
-        std::abort(); // FIXME
+        throw InternalError("fetch value: unsupported type");
     }
 
     return Value();
+  }
+
+  void
+  Row::fail(int) const
+  {
+    throw OutOfRange("row: out of range index");
   }
 
 

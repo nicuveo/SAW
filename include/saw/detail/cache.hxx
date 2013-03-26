@@ -49,7 +49,7 @@ namespace saw
     inline bool
     Cache<E, T>::cached(int index) const
     {
-      return not check_[index];
+      return not verify(index).check_[index];
     }
 
     template <typename E, typename T>
@@ -158,6 +158,15 @@ namespace saw
     Cache<E, T> const&
     Cache<E, T>::self()
     {
+      return *this;
+    }
+
+    template <typename E, typename T>
+    Cache<E, T> const&
+    Cache<E, T>::verify(int index) const
+    {
+      if (index < 0 || index >= size())
+        fail(index);
       return *this;
     }
 

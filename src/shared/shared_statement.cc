@@ -80,6 +80,12 @@ namespace saw
     return sqlite3_column_name(data(), i);
   }
 
+  void
+  SharedStatement::fail(int) const
+  {
+    throw OutOfRange("column: out of range index");
+  }
+
 
 
 }
