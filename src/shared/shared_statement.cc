@@ -44,6 +44,7 @@ namespace saw
   {
     Database db = parent.database();
 
+    row_invalidity_.raise();
     switch (sqlite3_step(data()))
     {
       case SQLITE_DONE:
@@ -51,7 +52,6 @@ namespace saw
         return false;
 
       case SQLITE_ROW:
-        row_invalidity_.raise();
         row_ = Row(parent, ++row_index_, row_invalidity_);
         return true;
 
