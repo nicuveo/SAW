@@ -15,8 +15,32 @@ Faced with the need to write some code using sqlite3's C API, I've procrastinate
 
 The goal of this small library is *NOT* to hide sqlite3's API; if it aimed to do so, it would be far more complicated than it already is. Its goal is simply to facilitate some common sqlite3 tasks, such as managing database connections and statements. All wrapped structures such as `Database` and `Statement` provide access to the raw data that lies beneath.
 
-Here's a short example of the clarity it brings to the code.
+See below a short example of the clarity it brings to the code. For a more detailed documentation; please see the [wiki](https://github.com/nicuveo/SAW/wiki).
 
+
+Installation
+------------
+
+``` bash
+./configure
+make
+make doc     # generates doxygen documentation
+make check   # runs tests and generates code coverage report using lcov and cppcheck
+make install # installs to /usr/local
+```
+
+Internal plumbing
+-----------------
+
+Inside, *SAW* uses lots of `boost` code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using `boost::variant` and iterators use `boost::iterator_facade`.
+
+The code has been mostly tested and is currently at >90% of code coverage as reported by *lcov*.
+
+If, somehow, you end up using it, please let me know what you think!
+
+
+C API / _SAW_ comparison
+------------------------
 
 ### C API
 
@@ -101,26 +125,3 @@ void run(const char* name, int score_min)
   }
 }
 ```
-
-
-Installation
-------------
-
-``` bash
-./configure
-make
-make doc     # generates doxygen documentation
-make check   # runs tests and generates code coverage report using lcov and cppcheck
-make install # installs to /usr/local
-```
-
-
-
-Internal plumbing
------------------
-
-Inside, *SAW* uses lots of `boost` code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using `boost::variant` and iterators use `boost::iterator_facade`.
-
-The code has been mostly tested and is currently at >90% of code coverage as reported by *lcov*.
-
-If, somehow, you end up using it, please let me know what you think!
