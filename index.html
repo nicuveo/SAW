@@ -48,7 +48,26 @@
 
 <p>The goal of this small library is <em>NOT</em> to hide sqlite3's API; if it aimed to do so, it would be far more complicated than it already is. Its goal is simply to facilitate some common sqlite3 tasks, such as managing database connections and statements. All wrapped structures such as <code>Database</code> and <code>Statement</code> provide access to the raw data that lies beneath.</p>
 
-<p>Here's a short example of the clarity it brings to the code.</p>
+<p>See below a short example of the clarity it brings to the code. For a more detailed documentation; please see the <a href="https://github.com/nicuveo/SAW/wiki">wiki</a>.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre>./configure
+make
+make doc     <span class="c"># generates doxygen documentation</span>
+make check   <span class="c"># runs tests and generates code coverage report using lcov and cppcheck</span>
+make install <span class="c"># installs to /usr/local</span>
+</pre></div>
+
+<h2>Internal plumbing</h2>
+
+<p>Inside, <em>SAW</em> uses lots of <code>boost</code> code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using <code>boost::variant</code> and iterators use <code>boost::iterator_facade</code>.</p>
+
+<p>The code has been mostly tested and is currently at &gt;90% of code coverage as reported by <em>lcov</em>.</p>
+
+<p>If, somehow, you end up using it, please let me know what you think!</p>
+
+<h2>C API / <em>SAW</em> comparison</h2>
 
 <h3>C API</h3>
 
@@ -130,23 +149,6 @@
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-<h2>Installation</h2>
-
-<div class="highlight"><pre>./configure
-make
-make doc     <span class="c"># generates doxygen documentation</span>
-make check   <span class="c"># runs tests and generates code coverage report using lcov and cppcheck</span>
-make install <span class="c"># installs to /usr/local</span>
-</pre></div>
-
-<h2>Internal plumbing</h2>
-
-<p>Inside, <em>SAW</em> uses lots of <code>boost</code> code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using <code>boost::variant</code> and iterators use <code>boost::iterator_facade</code>.</p>
-
-<p>The code has been mostly tested and is currently at &gt;90% of code coverage as reported by <em>lcov</em>.</p>
-
-<p>If, somehow, you end up using it, please let me know what you think!</p>
       </section>
     </div>
 
