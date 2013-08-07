@@ -309,7 +309,7 @@ main()
 	echo "CFLAGS += $coptions" >> Makefile.rules
     fi
     if [ -n "$loptions" ] ; then
-	echo "LDFLAGS = $loptions \$(LDFLAGS)" >> Makefile.rules
+	echo "LDFLAGS := $loptions \$(LDFLAGS)" >> Makefile.rules
     fi
 
     echo "" >> Makefile.rules

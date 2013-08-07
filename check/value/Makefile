@@ -16,11 +16,11 @@ all: $(EXE)
 clean:
 	rm -f $(OBJS)
 
+clean:
+	rm -fv $(OBJS) $(EXE) $(DEPS) *.o *.d gmon.out *.gcno *.gcno *.gcov *.gcda
+
 distclean: clean
-	rm -f *.db
-	rm -f $(EXE) $(DEPS) *.o *.d *.out *.err Makefile.rules
-	rm -f gmon.out
-	rm -f *.gcno *.gcno *.gcov *.gcda cov.info
+	rm -fv *.out *.err Makefile.rules
 
 
 # COMPIL

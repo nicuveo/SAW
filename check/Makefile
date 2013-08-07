@@ -32,12 +32,11 @@ coverage:
 
 clean:
 	for e in $(TESTS) ; do (cd $$e && make clean) ; done
+	rm -Rfv analysis.log coverage.log test.log coverage.info $(COVERAGE_OUT)
 
 distclean:
 	for e in $(TESTS) ; do (cd $$e && make distclean) ; done
 	rm -f Makefile.rules default/Makefile.rules
-	rm -f analysis.log coverage.log test.log coverage.info
-	rm -Rf $(COVERAGE_OUT)
 
 
 

@@ -15,8 +15,6 @@ CFLAGS	  = -W -Wall -Wextra -ansi -pedantic -I include -I src
 DFLAGS    = -O0 -g3 -ggdb3 -DDEBUG
 RFLAGS    = -O3 -DNDEBUG
 LDFLAGS   =
-LIBS      =
-LIBS_DIRS =
 TARGETS   = $(LIBA)
 
 CFIL =                                 \

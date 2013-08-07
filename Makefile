@@ -7,27 +7,27 @@
 
 # MAIN
 
-PROJ = saw
+PROJ    = saw
+EXE     = bin/$(PROJ)
+LIBA    = bin/lib$(PROJ).a
+LIBSO   = bin/lib$(PROJ).so
+DYLIB   = bin/lib$(PROJ).dylib
+INCLUDE = include/$(PROJ)
 
 $(PROJ): all
 
 sinclude Makefile.rules
+sinclude Makefile.custom
 
 
 
 # VARIABLES
 
-EXE   = bin/$(PROJ)
-LIBA  = bin/lib$(PROJ).a
-LIBSO = bin/lib$(PROJ).so
-DYLIB = bin/lib$(PROJ).dylib
-
 OBJS  = $(addprefix $(BUILD_DIR)/, $(notdir $(CFIL:.cc=.o)))
 DEPS  = $(addprefix $(BUILD_DIR)/, $(notdir $(CFIL:.cc=.d)))
 
 CLEAN += '*~' '\#*' '.\#*' '.DS_Store' '.gdb_history' '*.stackdump' \
-'.gdb_history' 'gmon.out' '*.dSYM' '*.gcno' '*.gcda'
-DISTCLEAN += '*.o' '*.d' 'Makefile.rules'
+'.gdb_history' 'gmon.out' '*.dSYM'
 
 
 
@@ -36,22 +36,29 @@ DISTCLEAN += '*.o' '*.d' 'Makefile.rules'
 all: $(TARGETS)
 
 install: all
-	if [ -x ./install ] ; then ./install "$(PREFIX)" ; else cp $(TARGETS) $(PREFIX) ; fi
+	@if [ -x ./install ] ; then ./install "$(PREFIX)" ; else			\
+	    test -r "$(EXE)"     && install -v        "$(EXE)"   "$(PREFIX)/bin";	\
+	    test -r "$(LIBA)"    && install -v -m 644 "$(LIBA)"  "$(PREFIX)/lib";	\
+	    test -r "$(LIBSO)"   && install -v -m 644 "$(LIBSO)" "$(PREFIX)/lib";	\
+	    test -r "$(DYLIB)"   && install -v -m 644 "$(DYLIB)" "$(PREFIX)/lib";	\
+	    test -d "$(INCLUDE)" && find "$(INCLUDE)" -type f -exec			\
+                                    install -v -m 644 "{}"    -D "$(PREFIX)/{}" \;;	\
+	fi
 
 
 
 # COMPIL
 
-$(EXE): $(LIBS) $(OBJS)
+$(EXE): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(EXE)
 
-$(LIBA): $(LIBS) $(OBJS)
+$(LIBA): $(OBJS)
 	ar -scr $(LIBA) $(OBJS)
 
-$(LIBSO): $(LIBS) $(OBJS)
+$(LIBSO): $(OBJS)
 	$(CC) -shared $(OBJS) $(LDFLAGS) -o $(LIBSO)
 
-$(DYLIB): $(LIBS) $(OBJS)
+$(DYLIB): $(OBJS)
 	$(CC) -dynamiclib $(OBJS) $(LDFLAGS) -o $@
 
 $(OBJS):
@@ -69,38 +76,25 @@ $1: all
 	$(call sub_call_rule,$1,all)
 endef
 
-
 $(foreach sub,$(SUB_DIRS),$(eval $(call sub_make_rule,$(sub))))
 
-$(LIBS): libs
-
-
-libs:
-	$(foreach lib,$(LIBS_DIRS),$(call sub_call_rule,$(lib),all);)
-
-conf_libs:
-	$(foreach lib,$(LIBS_DIRS),$(call sub_call_func,$(lib),./configure $(CONF_LIBS));)
 
 clean: do_clean
-	$(foreach lib,$(LIBS_DIRS),$(call sub_call_rule,$(lib),-k clean);)
-	$(foreach sub,$(SUB_DIRS) ,$(call sub_call_rule,$(sub),-k clean);)
-	for f in ${CLEAN} ; do find . -name "$$f" | xargs rm -Rf ; done
+	$(foreach sub,$(SUB_DIRS) ,$(call sub_call_rule,$(sub), clean);)
 
 distclean: do_distclean
-	$(foreach lib,$(LIBS_DIRS),$(call sub_call_rule,$(lib),-k distclean);)
-	$(foreach sub,$(SUB_DIRS) ,$(call sub_call_rule,$(sub),-k distclean);)
-	for f in ${DISTCLEAN} ; do find . -name "$$f" | xargs rm -Rf ; done
+	$(foreach lib,$(LIBS_DIRS),$(call sub_call_rule,$(lib), distclean);)
 
 
 
 # CLEAN
 
 do_clean:
-	rm -f $(OBJS)
+	for f in ${CLEAN} ; do find . -name "$$f" | xargs rm -Rfv ; done
+	rm -fv $(OBJS) $(EXE) $(LIBA) $(LIBSO) $(DYLIB) $(DEPS)
 
 do_distclean: do_clean
-	rm -f $(EXE) $(LIBA) $(LIBSO) $(DYLIB) $(DEPS)
-	rm -Rf doc/doxygen/*
+	rm -Rfv doc/doxygen/* build/* bin/* Makefile.rules
 
 
 
@@ -109,9 +103,6 @@ do_distclean: do_clean
 doc:
 	./doc/input/regen
 	doxygen Doxyfile
-
-export:
-	svn export --force . $(or $(EXPORT), "export")
 
 tarball:
 	./scripts/tarball . $(PROJ)
@@ -128,6 +119,8 @@ $(foreach file,$(CFIL),$(eval $(call dependency_rule,$(file))))
 Makefile.rules:
 	./configure $(CONFIGURE_ARGS)
 
+conf: Makefile.rules
+
 
 
 # MISC
@@ -142,4 +135,4 @@ todo:
 
 # SPECIALS
 
-.PHONY: todo flower doc export $(LIBS_DIRS) $(SUB_DIRS)
+.PHONY: todo flower doc $(SUB_DIRS)
