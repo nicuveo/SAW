@@ -1,6 +1,10 @@
 //
-// database.cc for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 
@@ -8,9 +12,9 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-#include <saw/row_iterator.hh>
-#include <saw/statement.hh>
-#include <saw/database.hh>
+#include <nauths/saw/row_iterator.hh>
+#include <nauths/saw/statement.hh>
+#include <nauths/saw/database.hh>
 #include "shared/shared_database.hh"
 
 

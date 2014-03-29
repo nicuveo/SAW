@@ -1,6 +1,10 @@
 //
-// blob.hh for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_BLOB_HH_
@@ -13,7 +17,7 @@
 
 # include <vector>
 # include <ostream>
-# include <saw/types.hh>
+# include <nauths/saw/types.hh>
 
 
 

@@ -1,6 +1,10 @@
 //
-// database.hxx for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_DATABASE_HXX_
@@ -11,7 +15,7 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <saw/database.hh>
+# include <nauths/saw/database.hh>
 
 
 

@@ -1,6 +1,10 @@
 //
-// shared_statement.hh for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_SHARED_STATEMENT_HH_
@@ -12,11 +16,11 @@
 // Includes
 
 # include <sqlite3.h>
-# include <saw/detail/cache.hh>
-# include <saw/detail/flag.hh>
-# include <saw/database.hh>
-# include <saw/types.hh>
-# include <saw/row.hh>
+# include <nauths/saw/detail/cache.hh>
+# include <nauths/saw/detail/flag.hh>
+# include <nauths/saw/database.hh>
+# include <nauths/saw/types.hh>
+# include <nauths/saw/row.hh>
 
 
 

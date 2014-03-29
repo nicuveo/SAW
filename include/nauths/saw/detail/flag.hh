@@ -1,6 +1,10 @@
 //
-// flag.hh for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_FLAG_HH_
@@ -55,7 +59,7 @@ namespace saw
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <saw/detail/flag.hxx>
+# include <nauths/saw/detail/flag.hxx>
 
 
 

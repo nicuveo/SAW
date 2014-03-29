@@ -1,6 +1,10 @@
 //
-// database.hh for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_DATABASE_HH_
@@ -11,9 +15,9 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <saw/detail/owner.hh>
-# include <saw/parameter.hh>
-# include <saw/types.hh>
+# include <nauths/saw/detail/owner.hh>
+# include <nauths/saw/parameter.hh>
+# include <nauths/saw/types.hh>
 
 
 
@@ -65,7 +69,7 @@ namespace saw
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <saw/database.hxx>
+# include <nauths/saw/database.hxx>
 
 
 

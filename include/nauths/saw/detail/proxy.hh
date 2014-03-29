@@ -1,6 +1,10 @@
 //
-// proxy.hh for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_PROXY_HH_
@@ -58,7 +62,7 @@ namespace saw
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <saw/detail/proxy.hxx>
+# include <nauths/saw/detail/proxy.hxx>
 
 
 

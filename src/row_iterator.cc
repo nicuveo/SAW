@@ -1,6 +1,10 @@
 //
-// row_iterator.cc for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 
@@ -8,9 +12,9 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-#include <saw/statement.hh>
-#include <saw/exceptions.hh>
-#include <saw/row_iterator.hh>
+#include <nauths/saw/statement.hh>
+#include <nauths/saw/exceptions.hh>
+#include <nauths/saw/row_iterator.hh>
 
 
 

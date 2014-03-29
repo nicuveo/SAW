@@ -1,6 +1,10 @@
 //
-// statement.hh for saw
-// Made by nicuveo <crucuny@gmail.com>
+// Copyright Antoine Leblanc 2010 - 2013
+// Distributed under the MIT license.
+//
+// http://nauths.fr
+// http://github.com/nicuveo
+// mailto://antoine.jp.leblanc@gmail.com
 //
 
 #ifndef SAW_STATEMENT_HH_
@@ -14,12 +18,12 @@
 # include <string>
 # include <vector>
 # include <boost/bind.hpp>
-# include <saw/detail/owner.hh>
-# include <saw/detail/proxy.hh>
-# include <saw/parameter.hh>
-# include <saw/database.hh>
-# include <saw/value.hh>
-# include <saw/types.hh>
+# include <nauths/saw/detail/owner.hh>
+# include <nauths/saw/detail/proxy.hh>
+# include <nauths/saw/parameter.hh>
+# include <nauths/saw/database.hh>
+# include <nauths/saw/value.hh>
+# include <nauths/saw/types.hh>
 
 
 
@@ -112,7 +116,7 @@ namespace saw
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <saw/statement.hxx>
+# include <nauths/saw/statement.hxx>
 
 
 

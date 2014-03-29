@@ -7,29 +7,20 @@
 // mailto://antoine.jp.leblanc@gmail.com
 //
 
-#ifndef SAW_ERROR_HH_
-# define SAW_ERROR_HH_
+#ifndef SAW_HH_
+# define SAW_HH_
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
+# include <nauths/saw/row.hh>
+# include <nauths/saw/database.hh>
+# include <nauths/saw/statement.hh>
+# include <nauths/saw/row_iterator.hh>
 # include <nauths/saw/exceptions.hh>
-# include <nauths/saw/types.hh>
 
 
 
-//HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-// Declarations
-
-namespace saw
-{
-
-  void check(Database d, int sqlite_code);
-
-}
-
-
-
-#endif /* !SAW_ERROR_HH_ */
+#endif /* !SAW_HH_ */
