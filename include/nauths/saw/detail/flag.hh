@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -15,8 +15,7 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <boost/weak_ptr.hpp>
-# include <boost/shared_ptr.hpp>
+# include <memory>
 
 
 
@@ -29,7 +28,7 @@ namespace saw
   namespace detail
   {
 
-    class Flag : private boost::shared_ptr<int>
+    class Flag : private std::shared_ptr<int>
     {
       public:
         friend class Watcher;
@@ -40,7 +39,7 @@ namespace saw
         void lower();
     };
 
-    class Watcher : private boost::weak_ptr<int>
+    class Watcher : private std::weak_ptr<int>
     {
       public:
         Watcher();

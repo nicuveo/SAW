@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -15,7 +15,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <nauths/saw/saw.hh>
-#include "misc/foreach.hh"
 
 #define BOOST_TEST_MODULE statement
 #include <boost/test/included/unit_test.hpp>
@@ -125,11 +124,11 @@ namespace
     int ri = r.index();
 
     std::cout << ri << ": NC {";
-    saw_foreach (const saw::Value& v, cr.values())
+    for (const saw::Value& v : cr.values())
       std::cout << " " << v.as_integer();
     std::cout << " }" << std::endl
               << ri << ":  C {";
-    saw_foreach (const saw::Value& v, r.values())
+    for (const saw::Value& v : r.values())
       std::cout << " " << v.as_integer();
     std::cout << " }" << std::endl;
 
@@ -220,7 +219,7 @@ BOOST_AUTO_TEST_CASE(statement_08)
   BOOST_CHECK_NO_THROW(s.reset());
 
   int index = 0;
-  for(saw::RowRange r = s.result(); r.first != r.second; ++r.first, ++index)
+  for (saw::RowRange r = s.result(); r.first != r.second; ++r.first, ++index)
   {
     BOOST_CHECK_EQUAL(index, s.current_row_index());
     test_callback(*r.first);

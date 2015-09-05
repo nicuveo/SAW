@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -15,7 +15,6 @@
 #include <cstring>
 #include <iomanip>
 #include <nauths/saw/blob.hh>
-#include "misc/foreach.hh"
 
 
 
@@ -71,7 +70,7 @@ namespace saw
   std::ostream&
   operator<<(std::ostream& ostr, const Blob& blob)
   {
-    saw_foreach (Byte b, blob)
+    for (Byte b : blob)
       ostr << std::hex << b;
     return ostr;
   }

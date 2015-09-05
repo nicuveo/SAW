@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -15,7 +15,6 @@
 #include <boost/bind.hpp>
 #include <nauths/saw/exceptions.hh>
 #include <nauths/saw/row.hh>
-#include "misc/foreach.hh"
 
 
 

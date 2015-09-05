@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -17,10 +17,10 @@
 
 # include <vector>
 # include <cstdlib>
-# include <utility>
 # include <sqlite3.h>
 # include <boost/blank.hpp>
 # include <boost/function.hpp>
+# include <nauths/npl/range.hh>
 
 
 
@@ -54,7 +54,7 @@ namespace saw
   typedef std::vector<Row> Rows;
   typedef std::vector<Value> Values;
 
-  typedef std::pair<RowIterator, RowIterator> RowRange;
+  typedef npl::Range<RowIterator> RowRange;
   typedef boost::function1<void, Row&> RowCallback;
 
 

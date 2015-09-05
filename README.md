@@ -21,6 +21,8 @@ See below a short example of the clarity it brings to the code. For a more detai
 Installation
 ------------
 
+*SAW* requires [*NPL*](https://github.com/nicuveo/NPL) to build.
+
 ``` bash
 ./configure
 make
@@ -32,7 +34,7 @@ make install # installs to /usr/local
 Internal plumbing
 -----------------
 
-Inside, *SAW* uses lots of `boost` code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using `boost::variant` and iterators use `boost::iterator_facade`.
+This library uses C++11 features and lots of `boost` code. For instance, database and statement handlers are shared using reference counting shared pointers. Values are implemented using `boost::variant` and iterators use `boost::iterator_facade`.
 
 The code has been mostly tested and is currently at >90% of code coverage as reported by *lcov*.
 
@@ -116,7 +118,7 @@ void run(const char* name, int score_min)
     stmt[1] = name;
     stmt[2] = score_min;
 
-    BOOST_FOREACH (const saw::Row& row, stmt.result())
+    for (const saw::Row& row : stmt.result())
       std::cout << "score: " << row[0].as_integer() << std::endl;
   }
   catch (const saw::Exception& e)

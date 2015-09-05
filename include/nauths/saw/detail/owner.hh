@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -15,7 +15,7 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <boost/shared_ptr.hpp>
+# include <memory>
 
 
 
@@ -29,7 +29,7 @@ namespace saw
   {
 
     template <typename T>
-    class Owner : public boost::shared_ptr<T>
+    class Owner : public std::shared_ptr<T>
     {
       public:
         T&             data()       { return *this->get(); }

@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -55,7 +55,7 @@ namespace saw
     inline bool
     Flag::raised() const
     {
-      return (*this);
+      return bool(*this);
     }
 
 
@@ -77,7 +77,7 @@ namespace saw
     }
 
     inline Watcher::Watcher(Flag f)
-      : boost::weak_ptr<int>(f)
+      : std::weak_ptr<int>(f)
     {
     }
 
@@ -85,7 +85,7 @@ namespace saw
     inline bool
     Watcher::valid() const
     {
-      return lock();
+      return bool(lock());
     }
 
     inline bool

@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -14,7 +14,6 @@
 
 #include <nauths/saw/statement.hh>
 #include <nauths/saw/row_iterator.hh>
-#include "misc/foreach.hh"
 #include "shared/shared_statement.hh"
 #include "error.hh"
 
@@ -164,7 +163,7 @@ namespace saw
   Statement&
   Statement::bind(const Parameters& ps)
   {
-    saw_foreach (const Parameter& p, ps)
+    for (const Parameter& p : ps)
       bind(p);
     return *this;
   }
@@ -208,7 +207,7 @@ namespace saw
   {
     Rows res;
 
-    saw_foreach (Row& r, result())
+    for (Row& r : result())
       res.push_back(r.load());
 
     return res;
@@ -223,7 +222,7 @@ namespace saw
   void
   Statement::exec(const RowCallback& rcb)
   {
-    saw_foreach (Row& r, result())
+    for (Row& r : result())
       rcb(r);
   }
 

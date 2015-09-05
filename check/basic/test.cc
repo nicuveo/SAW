@@ -1,5 +1,5 @@
 //
-// Copyright Antoine Leblanc 2010 - 2013
+// Copyright Antoine Leblanc 2010 - 2015
 // Distributed under the MIT license.
 //
 // http://nauths.fr
@@ -15,7 +15,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <nauths/saw/saw.hh>
-#include <boost/foreach.hpp>
 
 #define BOOST_TEST_MODULE basic
 #include <boost/test/included/unit_test.hpp>
