@@ -1,10 +1,3 @@
-##
-## Makefile for saw
-## Made by nicuveo <crucuny@gmail.com>
-##
-
-
-
 # MAIN
 
 PROJ    = saw
@@ -118,7 +111,8 @@ $(foreach file,$(CFIL),$(eval $(call dependency_rule,$(file))))
 Makefile.rules:
 	./configure $(CONFIGURE_ARGS)
 
-conf: Makefile.rules
+conf:
+	./configure $(CONFIGURE_ARGS)
 
 
 
@@ -134,4 +128,4 @@ todo:
 
 # SPECIALS
 
-.PHONY: todo flower doc $(SUB_DIRS)
+.PHONY: conf todo flower doc $(SUB_DIRS)
