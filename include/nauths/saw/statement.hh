@@ -17,7 +17,6 @@
 
 # include <string>
 # include <vector>
-# include <boost/bind.hpp>
 # include <nauths/saw/detail/owner.hh>
 # include <nauths/saw/detail/proxy.hh>
 # include <nauths/saw/parameter.hh>

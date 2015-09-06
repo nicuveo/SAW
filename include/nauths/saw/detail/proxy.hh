@@ -15,7 +15,7 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-# include <boost/function.hpp>
+# include <functional>
 
 
 
@@ -34,7 +34,7 @@ namespace saw
       public:
         // types
 
-        typedef boost::function1<void, T> Callback;
+        typedef std::function<void (T)> Callback;
 
 
         // constructor

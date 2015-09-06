@@ -12,7 +12,6 @@
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Includes
 
-#include <boost/bind.hpp>
 #include <nauths/saw/exceptions.hh>
 #include <nauths/saw/row.hh>
 

@@ -19,7 +19,6 @@
 # include <cstdlib>
 # include <sqlite3.h>
 # include <boost/blank.hpp>
-# include <boost/function.hpp>
 # include <nauths/npl/range.hh>
 
 
@@ -55,7 +54,7 @@ namespace saw
   typedef std::vector<Value> Values;
 
   typedef npl::Range<RowIterator> RowRange;
-  typedef boost::function1<void, Row&> RowCallback;
+  typedef std::function<void (Row&)> RowCallback;
 
 
   // internal classes

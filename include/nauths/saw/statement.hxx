@@ -60,19 +60,22 @@ namespace saw
   inline Statement::Proxy
   Statement::operator[](const ParameterKey& key)
   {
-    return Proxy(boost::bind(static_cast<Statement& (Statement::*)(const ParameterKey&, const Value&)>(&Statement::bind), this, key, _1));
+    using namespace std::placeholders;
+    return Proxy(std::bind(static_cast<Statement& (Statement::*)(const ParameterKey&, const Value&)>(&Statement::bind), this, key, _1));
   }
 
   inline Statement::Proxy
   Statement::operator[](const ParameterName& name)
   {
-    return Proxy(boost::bind(static_cast<Statement& (Statement::*)(const ParameterName&, const Value&)>(&Statement::bind), this, name, _1));
+    using namespace std::placeholders;
+    return Proxy(std::bind(static_cast<Statement& (Statement::*)(const ParameterName&, const Value&)>(&Statement::bind), this, name, _1));
   }
 
   inline Statement::Proxy
   Statement::operator[](const ParameterIndex& index)
   {
-    return Proxy(boost::bind(static_cast<Statement& (Statement::*)(const ParameterIndex&, const Value&)>(&Statement::bind), this, index, _1));
+    using namespace std::placeholders;
+    return Proxy(std::bind(static_cast<Statement& (Statement::*)(const ParameterIndex&, const Value&)>(&Statement::bind), this, index, _1));
   }
 
 

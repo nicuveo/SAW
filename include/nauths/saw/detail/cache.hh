@@ -16,7 +16,6 @@
 // Includes
 
 # include <vector>
-# include <boost/function.hpp>
 # include <boost/dynamic_bitset.hpp>
 
 
