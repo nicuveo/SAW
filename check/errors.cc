@@ -14,15 +14,15 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE errors
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(errors)
 
 BOOST_AUTO_TEST_CASE(errors_00)
 {
@@ -96,3 +96,5 @@ BOOST_AUTO_TEST_CASE(errors_04)
 {
   BOOST_CHECK_THROW(saw::Database("/doesnotexist/impossibru.db"), saw::RuntimeError);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

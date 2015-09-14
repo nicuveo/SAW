@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE cache
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
@@ -55,6 +53,8 @@ namespace
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(cache)
 
 BOOST_AUTO_TEST_CASE(cache_00)
 {
@@ -133,3 +133,5 @@ BOOST_AUTO_TEST_CASE(cache_02)
   BOOST_REQUIRE(not c.cached(0));
   BOOST_REQUIRE(not c.cached(1));
 }
+
+BOOST_AUTO_TEST_SUITE_END()

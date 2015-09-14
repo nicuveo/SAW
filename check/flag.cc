@@ -14,15 +14,15 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE flag
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(flag)
 
 BOOST_AUTO_TEST_CASE(flag_00)
 {
@@ -57,3 +57,5 @@ BOOST_AUTO_TEST_CASE(flag_00)
   BOOST_REQUIRE(not w2.valid()   );
   BOOST_REQUIRE(    w2.obsolete());
 }
+
+BOOST_AUTO_TEST_SUITE_END()

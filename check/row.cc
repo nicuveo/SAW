@@ -14,15 +14,15 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE row
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(row)
 
 BOOST_AUTO_TEST_CASE(row_00)
 {
@@ -44,3 +44,5 @@ BOOST_AUTO_TEST_CASE(row_00)
   BOOST_CHECK_EQUAL("foo",            rs[0][2].as_text() );
   BOOST_CHECK_EQUAL(saw::Blob("bar"), rs[0][3].as_blob() );
 }
+
+BOOST_AUTO_TEST_SUITE_END()

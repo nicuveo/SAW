@@ -13,16 +13,17 @@
 // Includes
 
 #include <cstdlib>
+#include <sstream>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE statement
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(statement)
 
 BOOST_AUTO_TEST_CASE(statement_00)
 {
@@ -122,15 +123,12 @@ namespace
   {
     saw::Row const& cr = r;
     int ri = r.index();
+    std::stringstream s;
 
-    std::cout << ri << ": NC {";
     for (const saw::Value& v : cr.values())
-      std::cout << " " << v.as_integer();
-    std::cout << " }" << std::endl
-              << ri << ":  C {";
+      s << v.as_integer();
     for (const saw::Value& v : r.values())
-      std::cout << " " << v.as_integer();
-    std::cout << " }" << std::endl;
+      s << v.as_integer();
 
     BOOST_REQUIRE_EQUAL(3, cr.columns_number());
 
@@ -233,3 +231,5 @@ BOOST_AUTO_TEST_CASE(statement_08)
   BOOST_CHECK_EQUAL(cn[1], s.column_name(1)); BOOST_CHECK_EQUAL(cn[1], "b");
   BOOST_CHECK_EQUAL(cn[2], s.column_name(2)); BOOST_CHECK_EQUAL(cn[2], "c");
 }
+
+BOOST_AUTO_TEST_SUITE_END()

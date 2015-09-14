@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE value
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
@@ -25,6 +23,8 @@
 // Implementation
 
 using namespace saw;
+
+BOOST_AUTO_TEST_SUITE(value)
 
 BOOST_AUTO_TEST_CASE(value_00)
 {
@@ -101,3 +101,5 @@ BOOST_AUTO_TEST_CASE(value_04)
   BOOST_REQUIRE_EQUAL(Text("4567"),  v.as_text()   );
   BOOST_REQUIRE_EQUAL(Blob("4567"),  v.as_blob()   );
 }
+
+BOOST_AUTO_TEST_SUITE_END()

@@ -13,11 +13,10 @@
 // Includes
 
 #include <cstdlib>
+#include <sstream>
 #include <iostream>
-#include <nauths/saw/saw.hh>
-
-#define BOOST_TEST_MODULE blob
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/saw/saw.hh"
 
 
 
@@ -28,7 +27,9 @@ using namespace saw;
 
 #define CHECK(a, b) BOOST_CHECK_EQUAL(a, b)
 
-BOOST_AUTO_TEST_CASE(blob_00)
+BOOST_AUTO_TEST_SUITE(blob)
+
+BOOST_AUTO_TEST_CASE(stable)
 {
   const int size = 16;
   const char data[size + 1] = "f00ff00ff00ff00f";
@@ -49,10 +50,14 @@ BOOST_AUTO_TEST_CASE(blob_00)
   CHECK(b1, b5); CHECK(b2, b5); CHECK(b3, b5); CHECK(b4, b5);
   CHECK(b1, b6); CHECK(b2, b6); CHECK(b3, b6); CHECK(b4, b6); CHECK(b5, b6);
 
-  BOOST_REQUIRE_NO_THROW(std::cout << b1);
-  BOOST_REQUIRE_NO_THROW(std::cout << b2);
-  BOOST_REQUIRE_NO_THROW(std::cout << b3);
-  BOOST_REQUIRE_NO_THROW(std::cout << b4);
-  BOOST_REQUIRE_NO_THROW(std::cout << b5);
-  BOOST_REQUIRE_NO_THROW(std::cout << b6);
+  std::stringstream s;
+
+  BOOST_REQUIRE_NO_THROW(s << b1);
+  BOOST_REQUIRE_NO_THROW(s << b2);
+  BOOST_REQUIRE_NO_THROW(s << b3);
+  BOOST_REQUIRE_NO_THROW(s << b4);
+  BOOST_REQUIRE_NO_THROW(s << b5);
+  BOOST_REQUIRE_NO_THROW(s << b6);
 }
+
+BOOST_AUTO_TEST_SUITE_END()
