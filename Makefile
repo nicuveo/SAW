@@ -32,7 +32,7 @@ check: debug
 # misc
 
 distclean:
-	rm -Rv build doc/doxygen doc/coverage
+	rm -Rvf build doc/doxygen doc/coverage
 
 doc:
 	./doc/input/regen
