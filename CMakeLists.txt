@@ -30,6 +30,7 @@ add_library(saw STATIC ${CXXFILES})
 # tests
 
 file(GLOB_RECURSE TESTFILES check/*.cc)
+file(GLOB_RECURSE ANAFILES  src/* include/*)
 add_executable(tests ${TESTFILES})
 target_link_libraries(tests saw sqlite3 --coverage)
 
@@ -41,8 +42,9 @@ add_custom_target(run_tests
 
 add_custom_target(run_analysis
     COMMAND ${PROJECT_SOURCE_DIR}/scripts/analysis
-            ${PROJECT_SOURCE_DIR}/include
-            ${PROJECT_SOURCE_DIR}/src
+            -I ${PROJECT_SOURCE_DIR}/include
+            -I ${PROJECT_SOURCE_DIR}/src
+            ${ANAFILES}
     COMMENT "running code analysis")
 
 add_custom_target(run_coverage

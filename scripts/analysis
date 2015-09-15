@@ -48,8 +48,8 @@ opts=""
 
 main()
 {
-    echo cppcheck --enable=all -q "$opts" "$@"
-    out=$(cppcheck --enable=all -q "$opts" "$@" 2>&1)
+    echo cppcheck --enable=all -q "$@"
+    out=$(cppcheck --enable=all -q "$@" 2>&1)
     echo "$out"
 }
 
@@ -62,10 +62,6 @@ if ! has cppcheck ; then
     echo "$0: cppcheck not in path, aborting"
     exit 0
 fi
-
-for dir in "$@"; do
-    opts="$opts -Idir"
-done
 
 date > "$LOG_FILE"
 run "source analysis" main "$@"
