@@ -29,9 +29,9 @@ BOOST_AUTO_TEST_CASE(errors_00)
   saw::Database d;
   saw::Statement s;
 
-  BOOST_CHECK_THROW(d.make("select * from toto"), saw::LogicError);
-  BOOST_CHECK_THROW(saw::Statement(d, "select * from toto"), saw::LogicError);
-  BOOST_CHECK_THROW(s.bind("toto", 2), saw::LogicError);
+  BOOST_CHECK_THROW(d.make("select * from toto0"), saw::LogicError);
+  BOOST_CHECK_THROW(saw::Statement(d, "select * from toto0"), saw::LogicError);
+  BOOST_CHECK_THROW(s.bind("toto0", 2), saw::LogicError);
   BOOST_CHECK_THROW(s.result(), saw::LogicError);
   BOOST_CHECK_THROW(s.exec(), saw::LogicError);
   BOOST_CHECK_THROW(s.step(), saw::LogicError);
@@ -42,10 +42,10 @@ BOOST_AUTO_TEST_CASE(errors_01)
 {
   saw::Database d("test.db");
 
-  d.exec("create table if not exists toto (a int);");
-  d.exec("insert into toto values (42), (51);");
+  d.exec("create table if not exists toto1 (a int);");
+  d.exec("insert into toto1 values (42), (51);");
 
-  saw::RowRange iterators = d.make("select * from toto;").result();
+  saw::RowRange iterators = d.make("select * from toto1;").result();
 
   saw::Row r1 = *iterators.first;
   saw::Row r2 = *++iterators.first;
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(errors_01)
 
   BOOST_CHECK_THROW(++iterators.first, saw::LogicError);
 
-  saw::Statement s = d.make("select * from toto;");
+  saw::Statement s = d.make("select * from toto1;");
   iterators = s.result();
 
   BOOST_CHECK_THROW(s.result(), saw::LogicError);
@@ -83,10 +83,10 @@ BOOST_AUTO_TEST_CASE(errors_03)
 {
   saw::Database d("test.db");
 
-  d.exec("create table if not exists toto (a int);");
-  d.exec("insert into toto values (42), (51);");
+  d.exec("create table if not exists toto3 (a int);");
+  d.exec("insert into toto3 values (42), (51);");
 
-  saw::Statement s(d, "select * from toto;");
+  saw::Statement s(d, "select * from toto3;");
   saw::Row r = s.current_row();
 
   BOOST_CHECK_THROW(r[0], saw::OutOfRange);
