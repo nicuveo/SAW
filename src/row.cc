@@ -108,8 +108,6 @@ namespace saw
       default:
         throw InternalError("fetch value: unsupported type");
     }
-
-    return Value();
   }
 
   void
