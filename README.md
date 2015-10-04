@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/nicuveo/SAW.svg?branch=master)](https://travis-ci.org/nicuveo/SAW)
+[![Coverage Status](https://coveralls.io/repos/nicuveo/SAW/badge.svg?branch=master&service=github)](https://coveralls.io/github/nicuveo/SAW?branch=master)
+
 *SAW* (Sqlite3 API Wrapper)
 ===========================
 
