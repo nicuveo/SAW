@@ -73,6 +73,7 @@ namespace saw
   // constructor
 
   Row::Row()
+    : index_(-1)
   {
   }
 
